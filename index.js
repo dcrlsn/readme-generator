@@ -34,23 +34,18 @@ const questions = [
   },
   {
     type: "input",
-    name: "repository",
-    message: "Please enter the repository name."
-  },
-  {
-    type: "input",
     name: "description",
     message: "Please write a brief description of the project."
   },
   {
     type: "input",
     name: "installation",
-    message: "Please enter any installation command."
+    message: "Please enter any installation commands."
   },
   {
     type: "input",
     name: "tests",
-    message: "Please enter any test command.",
+    message: "Please enter any test commands.",
   },
   {
     type: "checkbox",
@@ -67,7 +62,7 @@ const questions = [
   {
     type: "input",
     name: "usage",
-    message: "What is the project used for?"
+    message: "How is this used?"
   },
   {
     type: "input",
@@ -81,15 +76,13 @@ const questions = [
   }
 ];
 
-// TODO: Create a function to write README file
-function writeToFile(fileName, data) { }
-
 // TODO: Create a function to initialize app
 function init() {
   inquirer.prompt(questions)
     .then(function (answers) {
-      console.log(answers.licenses)
-      console.log(generateMarkdown(answers))
+      fs.writeFile('exampleREADME.md', generateMarkdown(answers), (err) =>
+        err ? console.error(err) : console.log('Success!')
+      )
     });
 }
 

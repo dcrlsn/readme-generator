@@ -20,41 +20,76 @@ function renderLicenseBadge(license) {
 }
 
 function generateTable(data) {
-  let tableOfContents = `\n## Table of Contents\n`;
+  let tableOfContents = `
+## Table of Contents
+  `;
   if (data.installation) {
-    tableOfContents += `\n*[Installation](#installation)`
+    tableOfContents += `
+* [Installation](#installation)`
   };
   if (data.description) {
-    tableOfContents += `\n*[Description](#description)`
+    tableOfContents += `
+* [Description](#description)`
   };
   if (data.usage) {
-    tableOfContents += `\n*[Usage](#usage)`
+    tableOfContents += `
+* [Usage](#usage)`
   };
   if (data.contributors) {
-    tableOfContents += `\n*[Contributors](#contributors)`
+    tableOfContents += `
+* [Contributors](#contributors)`
   };
   if (data.licenses) {
-    tableOfContents += `\n*[Licenses](#licenses)`
+    tableOfContents += `
+* [Licenses](#licenses)`
   };
-  tableOfContents += `\n[Questions](#questions)`
+  tableOfContents += `
+* [Questions](#questions)`
   return tableOfContents;
 }
 
 // TODO: Create a function to generate markdown for README
 function generateMarkdown(data) {
   let readme = ``;
-  readme += `#${data.projectTitle}\n`;
-  readme += `${generateTable(data)}\n`;
-  if (data.installation) readme += `##Installation\n\`\`\`${data.installation}\`\`\`\n`
-  readme += `\n##Description\n${data.description}\n`;
-  if (data.usage) readme += `##Usage\n${data.usage}\n`
-  if (data.tests) readme += `##Tests\n\`\`\`${data.tests}\`\`\`\n`
-  if (data.contributors) readme += `##Contributors\n${data.contributors}\n`
+  readme += `
+# ${data.projectTitle}`;
+  readme += `${generateTable(data)}
+  `;
+  if (data.installation) readme += `
+## Installation
+\`\`\`${data.installation}\`\`\`
+  `
+  readme += `
+## Description
+${data.description}
+  `;
+  if (data.usage) readme += `
+## Usage
+${data.usage}
+`
+  if (data.tests) readme += `
+## Tests
+\`\`\`${data.tests}\`\`\`
+  `
+  if (data.contributors) readme += `
+## Contributors
+${data.contributors}
+  `
   if (data.licenses) {
-    readme += `##Licenses\n`
-    data.licenses.forEach(element => readme += `${renderLicenseBadge(element)}\n`)
+    readme += `
+## Licenses
+  `
+    data.licenses.forEach(element => readme += `
+${renderLicenseBadge(element)}
+  `)
   }
-  readme += `##Questions\nFind me on Github at https://github.com/${data.username}/\nAny Questions please contact me at ${data.email}`
+  readme += `
+## Questions
+
+Find me on Github at https://github.com/${data.username}/
+
+Any Questions please contact me at
+${data.email}`
   return readme;
 }
 module.exports = generateMarkdown;
