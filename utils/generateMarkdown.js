@@ -7,7 +7,7 @@ function renderLicenseBadge(license) {
     case 'BSD':
       badge = `[![License](https://img.shields.io/badge/License-BSD-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)`;
       break;
-    case 'GPL':
+    case 'GNU':
       badge = `[![License: GPL v3](https://img.shields.io/badge/License-GPL-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)`;
       break;
     case 'MIT':
