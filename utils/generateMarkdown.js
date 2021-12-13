@@ -23,66 +23,60 @@ function generateTable(data) {
   let tableOfContents = `
 ## Table of Contents
   `;
-  if (data.installation) {
-    tableOfContents += `
-* [Installation](#installation)`;
-  };
-  if (data.description) {
-    tableOfContents += `
-* [Description](#description)`;
-  };
-  if (data.usage) {
-    tableOfContents += `
-* [Usage](#usage)`;
-  };
-  if (data.contributors) {
-    tableOfContents += `
-* [Contributors](#contributors)`;
-  };
-  if (data.licenses) {
-    tableOfContents += `
-* [Licenses](#licenses)`;
-  };
-  tableOfContents += `
-* [Questions](#questions)`;
+  //generates table of contents if key has a value
+  for (const property in data) {
+    if (property === "username" || property === "projectTitle" || property === "email") { }
+    else if (data[property] != '') {
+      tableOfContents += `
+* [${capitalFirstLetter(property)}](#${property})`;
+    }
+  }
   return tableOfContents;
 };
+
+// capitalizes first letters for titles and links
+function capitalFirstLetter(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1)
+}
 
 // TODO: Create a function to generate markdown for README
 function generateMarkdown(data) {
   let readme = ``;
   readme += `
 # ${data.projectTitle}`;
+  // adds table of contents
   readme += `${generateTable(data)}
   `;
-  if (data.installation) readme += `
-## Installation
-\`\`\`${data.installation}\`\`\`
-  `
-  readme += `
-## Description
-${data.description}
-  `;
-  if (data.usage) readme += `
-## Usage
-${data.usage}
-`;
-  if (data.tests) readme += `
-## Tests
-\`\`\`${data.tests}\`\`\`
-  `;
-  if (data.contributors) readme += `
-## Contributors
-${data.contributors}
-  `;
-  if (data.licenses.length > 0) {
-    readme += `
-## Licenses
-  `;
-    data.licenses.forEach(element => readme += `
+  // iterates over object and populates data depending on the key if it has a value
+  for (const property in data) {
+    if (property === "username" || property === "projectTitle" || property === "email") { }
+    // else for code blocks
+    else if (property === "installation" || property === "tests" && data[property] != '') {
+      readme += `
+## ${capitalFirstLetter(property)}
+  
+\`\`\`${data[property]}\`\`\``
+    }
+    // else if for licenses to hit switch statement
+    else if (property === "licenses") {
+      if (property.length > 0) {
+        readme += `
+## ${capitalFirstLetter(property)}
+      `;
+        data[property].forEach(element => readme += `
 ${renderLicenseBadge(element)}
-  `);
-  };
+      `);
+      };
+    }
+    // all other properties are just normal paragraphs
+    else if (data[property] != '') {
+      readme += `
+## ${capitalFirstLetter(property)}
+  
+${data[property]}
+      `
+    }
+  }
   readme += `
 ## Questions
 
@@ -92,6 +86,7 @@ Any Questions please contact me at
 ${data.email}`;
   return readme;
 };
+
 module.exports = generateMarkdown;
 
 
