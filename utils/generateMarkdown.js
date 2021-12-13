@@ -1,4 +1,4 @@
-
+// switch for license badge
 function renderLicenseBadge(license) {
   switch (license) {
     case 'Apache':
