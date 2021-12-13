@@ -75,7 +75,7 @@ ${data.usage}
 ## Contributors
 ${data.contributors}
   `
-  if (data.licenses) {
+  if (data.licenses.length > 0) {
     readme += `
 ## Licenses
   `
@@ -93,3 +93,5 @@ ${data.email}`
   return readme;
 }
 module.exports = generateMarkdown;
+
+

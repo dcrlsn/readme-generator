@@ -1,1 +1,3 @@
 # readme-generator
+
+```npm install ```
