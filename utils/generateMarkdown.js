@@ -58,15 +58,14 @@ function generateMarkdown(data) {
 \`\`\`${data[property]}\`\`\``
     }
     // else if for licenses to hit switch statement
-    else if (property === "licenses") {
-      if (property.length > 0) {
-        readme += `
+    else if (property === "licenses" && data[property].length > 0) {
+      readme += `
 ## ${capitalFirstLetter(property)}
       `;
-        data[property].forEach(element => readme += `
+      data[property].forEach(element => readme += `
 ${renderLicenseBadge(element)}
       `);
-      };
+      ;
     }
     // all other properties are just normal paragraphs
     else if (data[property] != '') {

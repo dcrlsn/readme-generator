@@ -10,7 +10,6 @@ const questions = require('./utils/questions')
 function init() {
   inquirer.prompt(questions)
     .then(function (answers) {
-      console.log(answers)
       fs.writeFile('exampleREADME.md', generateMarkdown(answers), (err) =>
         err ? console.error(err) : console.log('Success!')
       );
