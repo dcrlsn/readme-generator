@@ -1,7 +1,7 @@
 // required packages
 const fs = require('fs');
-const inquirer = require('inquirer')
-const generateMarkdown = require('./utils/generateMarkdown')
+const inquirer = require('inquirer');
+const generateMarkdown = require('./utils/generateMarkdown');
 
 
 //inquirer prompts
@@ -66,10 +66,10 @@ function init() {
     .then(function (answers) {
       fs.writeFile('exampleREADME.md', generateMarkdown(answers), (err) =>
         err ? console.error(err) : console.log('Success!')
-      )
+      );
     });
 }
 
 // Function call to initialize app
-init()
+init();
 
